@@ -1,4 +1,7 @@
+# Project-specific ignores
 .DS_Store
+assets/*
+predictions_log.jsonl
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
