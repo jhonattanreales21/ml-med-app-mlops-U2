@@ -8,7 +8,7 @@ on:
 permissions:
   contents: read
   packages: write 
-  
+
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
@@ -40,9 +40,14 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Normalize owner name
+        id: owner
+        run: echo "owner=$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
+
       - name: Build Docker image
         run: |
-          docker build -t ghcr.io/${{ github.repository_owner }}/mlops-medical-app:latest .
+          docker build -t ghcr.io/${{ steps.owner.outputs.owner }}/mlops-medical-app:latest .
 
       - name: Push Docker image
-        run: docker push ghcr.io/${{ github.repository_owner }}/mlops-medical-app:latest
+        run: |
+          docker push ghcr.io/${{ steps.owner.outputs.owner }}/mlops-medical-app:latest
