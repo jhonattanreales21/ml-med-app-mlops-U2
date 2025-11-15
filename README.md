@@ -64,7 +64,7 @@ docker build -t mlops-medical-app .
 Este comando levanta una imagen con python:3.11, instala flask, copia el codigo fuente necesario para la app y expone el puerto 8000.
 
 
-## 5. Ejecutar el contenedor Docker
+## 5. Ejecutar el contenedor Docker.
 
 ```bash
 docker run -p 8000:8000 mlops-medical-app
